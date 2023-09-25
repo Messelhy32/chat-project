@@ -26,3 +26,7 @@ router.post("/create-user", async function (req, res) {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+
+// also don't forget to export your router
+
+module.exports = router;
