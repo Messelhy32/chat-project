@@ -1,3 +1,11 @@
+// you first need to import express and call the Router method to be able to use the router
+
+const express = require("express");
+const router = express.Router();
+
+//always remember to import the model you're performing CRUD operations on
+const User = require("../models/user");
+
 // In your routes/users.js file
 router.post("/create-user", async function (req, res) {
   try {
