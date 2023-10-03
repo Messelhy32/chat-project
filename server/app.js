@@ -7,8 +7,10 @@ var mongoose = require("mongoose");
 var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 var dotenv = require("dotenv");
+const cors = require("cors");
 dotenv.config();
 var app = express();
+app.use(cors());
 mongoose
   .connect(process.env.URI, {
     useNewUrlParser: true,
