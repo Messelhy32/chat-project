@@ -7,8 +7,9 @@ import { useState } from "react";
 function App() {
   const location = useLocation();
   const [isLogged, setIsLogged] = useState(false);
-  const handleLogin = () => {
+  const handleLogin = (username) => {
     setIsLogged(true);
+    sessionStorage.setItem('username',username);
   };
   return (
     <AnimatePresence mode='wait'>

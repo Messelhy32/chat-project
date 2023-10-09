@@ -8,8 +8,32 @@ var indexRouter = require("./routes/index");
 var userRouter = require("./routes/user");
 var dotenv = require("dotenv");
 const cors = require("cors");
+const http = require("http");
+const socketio = require('socket.io');
+
 dotenv.config();
 var app = express();
+const server = app.listen(80, () => {
+  console.log('Server running!')
+});
+const io = socketio(server, {
+  cors: {
+    origin: 'http://localhost:5173',
+    methods: ["GET", "POST"]
+  }
+});
+io.on('connection', (socket) => {
+  console.log('New connection')
+})
+// const server = http.createServer(app);
+// const { Server } = require("socket.io");
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:8080"
+//   }
+// });
+
+// server.listen(5173);
 app.use(cors());
 mongoose
   .connect(process.env.URI, {
@@ -39,6 +63,25 @@ app.use("/user", userRouter);
 app.use(function (req, res, next) {
   next(createError(404));
 });
+// server.listen(8080, () => {
+//   console.log("Server is running on http://localhost:8080");
+// });
+// io.on("connection", (socket) => {
+//   console.log("A user connected");
+
+//   // Listen for custom events from the client
+//   socket.on("chat message", (message) => {
+//     console.log("Received message:", message);
+
+//     // Broadcast the message to all connected clients
+//     io.emit("message", message);
+//   });
+
+//   // Handle disconnections
+//   socket.on("disconnect", () => {
+//     console.log("User disconnected");
+//   });
+// });
 
 // error handler
 app.use(function (err, req, res, next) {
