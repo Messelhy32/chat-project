@@ -14,7 +14,7 @@ const MessageContainer = () => {
   }, [setSelectedConversation]);
 
   return (
-    <div className='md:min-w-[450px] flex flex-col'>
+    <div className='flex-1 flex flex-col md:min-w-[450px]'>
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (
@@ -35,6 +35,7 @@ const MessageContainer = () => {
 };
 export default MessageContainer;
 
+// NoChatSelected component
 const NoChatSelected = () => {
   const { authUser } = useAuthContext();
   return (
